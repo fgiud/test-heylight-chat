@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8" />
-	<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self' https://*.salesforce.com">
-  <title>Test Embedded Messaging – Heylight</title>
-</head>
+<html>
 <body>
   <h1>Test Chat Heylight</h1>
   <p>Simulazione payload HeidiPay</p>
@@ -14,7 +8,7 @@
 			embeddedservice_bootstrap.settings.language = 'it'; // For example, enter 'en' or 'en-US'
 
 			window.addEventListener('onEmbeddedMessagingReady', () => {
-              window.embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+              embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
                 "ActionName": "Supporto Heylight",
 		            "Categoria": "Categoria Portale HeyLight 3",
                 "RawActionName": "Supporto",
@@ -30,7 +24,7 @@
 			embeddedservice_bootstrap.init(
 				'00D9X00000FicnO',
 				'test2_fg',
-				'https://compasscrm--uat3.sandbox.my.site.com/ESWtest2fg1765897989768',
+				'https://vercel.com/federicas-projects-53b7a862/test-chat/AzRGSmdtPJcv4XXcnvRnYN64QGfY',
 				{
 					scrt2URL: 'https://compasscrm--uat3.sandbox.my.salesforce-scrt.com'
 				}
@@ -43,6 +37,3 @@
 <script type='text/javascript' src='https://compasscrm--uat3.sandbox.my.site.com/ESWtest2fg1765897989768/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 </body>
 </html>
-
-
-
