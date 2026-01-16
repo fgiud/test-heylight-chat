@@ -2,28 +2,34 @@
 <body>
   <h1>Test Chat Heylight</h1>
   <!-- Custom Chat Launcher -->
-  <button id="custom-chat-launcher" class="custom-launcher-tab" onclick="launchChat()">Serve aiuto?</button>
+  <button id="custom-chat-launcher" class="custom-launcher-tab" onclick="launchChat()">
+  <span class="slds-icon_container slds-icon-utility-chat">
+    <svg class="slds-icon slds-icon--small" aria-hidden="true">
+      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chat"></use>
+    </svg>
+  </span>
+  Serve aiuto?
+</button>
   <style>
     .custom-launcher-tab {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: EA1C00_1;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 500;
-      font-size: 14px;
-      font-family: "HeyLight Sans", Arial;
-      z-index: 9998;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-      border: none;
+    position: fixed;
+    bottom: 0;
+    right: 30px;
+    background-color: #EA1C00;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px 6px 0px 0px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: "HeyLight Sans", Arial;
+    z-index: 9998;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    border: none;
     }
     .custom-launcher-tab:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+     text-decoration: underline;
     }
     .custom-launcher-tab.loading {
       opacity: 0.8;
@@ -74,24 +80,21 @@
     // Launch Chat API
     function launchChat() {
       const launcher = document.getElementById('custom-chat-launcher');
-      // Cambia il testo subito
       updateLauncherText('Un attimo e arriviamo!');
       // Aspetta 2 secondi prima di lanciare la chat
       setTimeout(() => {
         embeddedservice_bootstrap.utilAPI.launchChat()
           .then(() => {
             console.log('Chat launched successfully');
-            // Nascondi il button quando la chat si apre
             launcher.style.display = 'none';
           })
           .catch(() => {
             console.error('Error launching chat');
-            // Se c'è errore, ripristina il testo
             launcher.textContent = 'Serve aiuto?';
             launcher.classList.remove('loading');
           })
           .finally(() => {
-            console.log('Chat launch attempt completed');
+            //
           });
       }, 2000); // 2 secondi di delay
     }
@@ -107,3 +110,4 @@
   <script type='text/javascript' src='https://compasscrm--uat3.sandbox.my.site.com/ESWtest2fg1765897989768/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 </body>
 </html>
+
