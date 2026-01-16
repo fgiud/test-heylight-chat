@@ -8,7 +8,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: #EA1C00;
+      background-color: EA1C00_1;
       color: white;
       padding: 12px 24px;
       border-radius: 4px;
@@ -48,6 +48,16 @@
             "OpsApplicationUrl": "https://www.google.com/",
             "OriginationChannel": "Test Origination Channel"
           });
+          // Listener per quando la chat si chiude
+          window.addEventListener('onEmbeddedMessagingWindowClosed', () => {
+            console.log('Chat window closed - showing launcher');
+            const launcher = document.getElementById('custom-chat-launcher');
+            if (launcher) {
+              launcher.style.display = 'block';
+              launcher.textContent = 'Serve aiuto?';
+              launcher.classList.remove('loading');
+            }
+          });
         });
         embeddedservice_bootstrap.init(
           '00D9X00000FicnO',
@@ -63,17 +73,27 @@
     };
     // Launch Chat API
     function launchChat() {
-      embeddedservice_bootstrap.utilAPI.launchChat()
-        .then(() => {
-          console.log('Chat launched successfully');
-          updateLauncherText('Un attimo e arriviamo!');
-        })
-        .catch(() => {
-          console.error('Error launching chat');
-        })
-        .finally(() => {
-          console.log('Chat launch attempt completed');
-        });
+      const launcher = document.getElementById('custom-chat-launcher');
+      // Cambia il testo subito
+      updateLauncherText('Un attimo e arriviamo!');
+      // Aspetta 2 secondi prima di lanciare la chat
+      setTimeout(() => {
+        embeddedservice_bootstrap.utilAPI.launchChat()
+          .then(() => {
+            console.log('Chat launched successfully');
+            // Nascondi il button quando la chat si apre
+            launcher.style.display = 'none';
+          })
+          .catch(() => {
+            console.error('Error launching chat');
+            // Se c'è errore, ripristina il testo
+            launcher.textContent = 'Serve aiuto?';
+            launcher.classList.remove('loading');
+          })
+          .finally(() => {
+            console.log('Chat launch attempt completed');
+          });
+      }, 2000); // 2 secondi di delay
     }
     // Funzione per aggiornare il testo del launcher
     function updateLauncherText(text) {
@@ -87,4 +107,3 @@
   <script type='text/javascript' src='https://compasscrm--uat3.sandbox.my.site.com/ESWtest2fg1765897989768/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 </body>
 </html>
-
