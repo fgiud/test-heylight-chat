@@ -1,108 +1,39 @@
 <html>
 <body>
   <h1>Test Chat Heylight</h1>
-  <!-- Custom Chat Launcher -->
-  <button id="custom-chat-launcher" class="custom-launcher-tab" onclick="launchChat()">Serve aiuto?</button>
-  <style>
-    .custom-launcher-tab {
-    position: fixed;
-    bottom: 0;
-    right: 30px;
-    background-color: #EA1C00;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 6px 6px 0px 0px;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 14px;
-    font-family: "HeyLight Sans", Arial;
-    z-index: 9998;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
-    border: none;
-    }
-    .custom-launcher-tab:hover {
-     text-decoration: underline;
-    }
-  </style>
-  <script type='text/javascript'>
-    function initEmbeddedMessaging() {
-      try {
-        embeddedservice_bootstrap.settings.language = 'it';
-        embeddedservice_bootstrap.settings.hideChatButtonOnLoad = true;
-        window.addEventListener('onEmbeddedMessagingReady', () => {
-          console.log('Embedded Messaging Ready');
-          window.embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
-            "ActionName": "Supporto Heylight",
-            "Origin": "Portale HeyLight",
-            "Categoria": "Categoria Portale HeyLight 3",
-            "RawActionName": "Supporto",
-            "ProductName": "Prodotto di test",
-            "MerchantName": "Heylight",
-            "MerchantID": "5498730",
-            "SessionID": "453455498730",
-            "OpsApplicationUrl": "https://www.google.com/",
-            "OriginationChannel": "Test Origination Channel"
-          });
-          // Listener per quando la chat si chiude
-          window.addEventListener('onEmbeddedMessagingWindowClosed', () => {
-            console.log('Chat window closed - showing launcher');
-            const launcher = document.getElementById('custom-chat-launcher');
-            if (launcher) {
-              launcher.style.display = 'block';
-              launcher.textContent = 'Serve aiuto ?';
-              launcher.classList.remove('loading');
-            }
-          });
-        });
-        embeddedservice_bootstrap.init(
-          '00D1t000000D3KR',
-          'ChatBot_HeyLight_Enhanced'',
-          'https://compasscrm.my.site.com/ESWChatBotHeyLightEnhan1764576711959',
-          {
-            scrt2URL: 'https://compasscrm.my.salesforce-scrt.com'
-          }
-        );
-      } catch (err) {
-        console.error('Error loading Embedded Messaging: ', err);
-      }
-    };
-    // Launch Chat API
-    function launchChat() {
-      const launcher = document.getElementById('custom-chat-launcher');
-      updateLauncherText('Un attimo e arriviamo!');
-      // Aspetta 2 secondi prima di lanciare la chat
-      setTimeout(() => {
-        embeddedservice_bootstrap.utilAPI.launchChat()
-          .then(() => {
-            console.log('Chat launched successfully');
-            launcher.style.display = 'none';
-          })
-          .catch(() => {
-            console.error('Error launching chat');
-            launcher.textContent = 'Serve aiuto ?';
-            launcher.classList.remove('loading');
-          })
-          .finally(() => {
-            //
-          });
-      }, 2000); // 2 secondi di delay
-    }
-    // Funzione per aggiornare il testo del launcher
-    function updateLauncherText(text) {
-      const launcher = document.getElementById('custom-chat-launcher');
-      if (launcher) {
-        launcher.textContent = text;
-        launcher.classList.add('loading');
-      }
-    }
-  </script>
-  <script type='text/javascript' src='https://compasscrm.my.site.com/ESWChatBotHeyLightEnhan1764576711959/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+	<script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'it'; // For example, enter 'en' or 'en-US'
+
+			window.addEventListener('onEmbeddedMessagingReady', () => {
+              window.embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+                "ActionName": "Supporto Heylight",
+				"Origin": "Portale HeyLight",
+		        "Categoria": "Categoria Portale HeyLight 3",
+                "RawActionName": "Supporto",
+                "ProductName": "Prodotto di test",
+                "MerchantName": "Heylight",
+                "MerchantID": "5498730",
+                "SessionID": "453455498730",
+                "OpsApplicationUrl": "https://www.google.com/",
+                "OriginationChannel": "Test Origination Channel"
+              });
+            }); 
+
+			embeddedservice_bootstrap.init(
+				'00D1t000000D3KR',
+				'ChatBot_HeyLight_Enhanced',
+				'https://compasscrm.my.site.com/ESWChatBotHeyLightEnhan1764576711959',
+				{
+					scrt2URL: 'https://compasscrm.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+</script>
+<script type='text/javascript' src='https://compasscrm.my.site.com/ESWChatBotHeyLightEnhan1764576711959/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 </body>
 </html>
-
-
-
-
-
-
